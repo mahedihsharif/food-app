@@ -1,16 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import styles from "../styles/ProductCard.module.css";
-const ProductCard = () => {
+const ProductCard = ({ pizza }) => {
   return (
     <div className={styles.container}>
-      
-        <Image src="/img/pizza.png" alt="" width="500" height="500" />
-
-        <h1 className={styles.title}>Lorem Ipsum</h1>
-        <span className={styles.price}>$120</span>
-        <p className={styles.desc}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-     
+      <Link href={`/product/${pizza._id}`} passHref>
+        <Image src={pizza.img} alt="" width="500" height="500" />
+      </Link>
+      <h1 className={styles.title}>{pizza.title}</h1>
+      <span className={styles.price}>${pizza.prices[0]}</span>
+      <p className={styles.desc}>{pizza.desc}</p>
     </div>
   );
 };
