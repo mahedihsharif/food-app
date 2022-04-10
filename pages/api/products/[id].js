@@ -1,10 +1,13 @@
 import Product from "../../../models/Product";
+import dbConnect from "../../../utils/mongo";
 
 export default async function handler(req, res) {
   const {
     method,
     query: { id },
   } = req;
+
+  dbConnect();
 
   if (method === "GET") {
     try {
@@ -16,8 +19,14 @@ export default async function handler(req, res) {
   }
   if (method === "PUT") {
     try {
-      const newProduct = await Product.create(req.body);
-      res.status(201).json(newProduct);
+      const updateProduct = await Product.findOneAndUpdate(
+        id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(201).json(updateProduct);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -25,8 +34,8 @@ export default async function handler(req, res) {
 
   if (method === "DELETE") {
     try {
-      const newProduct = await Product.create(req.body);
-      res.status(201).json(newProduct);
+      await Product.findOneAndDelete(id);
+      res.status(201).json("Product successfully deleted...");
     } catch (err) {
       res.status(500).json(err);
     }
