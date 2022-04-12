@@ -6,7 +6,7 @@
   padding: 0px 50px;
   position: sticky;
   background-color: #d1411e;
-  top:0;
+  top: 0;
   z-index: 9999;
 }
 .iconButton {
@@ -29,6 +29,9 @@
 .text:last-child {
   font-size: 20px;
   font-weight: bold;
+}
+.item {
+  cursor: pointer;
 }
 .item:first-child {
   flex: 1;

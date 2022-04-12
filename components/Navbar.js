@@ -1,6 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useSelector } from "react-redux";
 import styles from "../styles/Navbar.module.css";
+
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
+
   return (
     <>
       <div className={styles.container}>
@@ -25,10 +30,12 @@ const Navbar = () => {
 
         <div className={styles.item}>
           <ul className={styles.listItem}>
-            <li className={styles.list}>Home</li>
+            <Link href="/" className={styles.list} passHref>
+              Home
+            </Link>
             <li className={styles.list}>Products</li>
             <li className={styles.list}>Menu</li>
-            <Image src="/img/logo.png" width="120" height="120"alt="cart"/>
+            <Image src="/img/logo.png" width="120" height="120" alt="cart" />
             <li className={styles.list}>Events</li>
             <li className={styles.list}>Blog</li>
             <li className={styles.list}>Contact</li>
@@ -37,10 +44,12 @@ const Navbar = () => {
 
         {/* right part */}
 
-        <div className={styles.item}>
-          <Image src="/img/cart.png" width="30" height="30"alt="cart"/> 
-          <span className={styles.counter}>2</span>
-        </div>
+        <Link href="/cart" passHref>
+          <div className={styles.item}>
+            <Image src="/img/cart.png" width="30" height="30" alt="cart" />
+            <span className={styles.counter}>{quantity}</span>
+          </div>
+        </Link>
       </div>
     </>
   );
