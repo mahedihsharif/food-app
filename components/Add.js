@@ -27,7 +27,7 @@ const Add = ({ setClose }) => {
   const handleCreate = async () => {
     const data = new FormData();
     data.append("file", file);
-    data.append("upload_preset", "uploads");
+    data.append("upload_preset", "uploads"); //this is cloudinary image upload folder structure like uploads name should be same as the name of cloudinary folder name which folder image will be upload in cloudinary site.  and one extra work should work that is next js don't support third party api link so for the cloudinary link i should some change in the main next.config.js file ( it should always remember)
     try {
       const uploadRes = await axios.post(
         "https://api.cloudinary.com/v1_1/dsbyq4sj1/image/upload",
